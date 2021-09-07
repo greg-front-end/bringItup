@@ -1,8 +1,6 @@
 # compiled output
-/dist
 /tmp
 /out-tsc
-/#src
 /iconsprite
 
 # Runtime data
