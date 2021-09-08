@@ -24,6 +24,22 @@ export default class MiniSlider extends Slider {
         }
     }
 
+    autoPlayActivate() {
+        if (this.autoplay) {
+            const paused = setInterval(() => this.nextSlide(), 5000);
+            this.slides.forEach(slide => {
+                if (slide.closest('a')) {
+                    slide.addEventListener('mouseenter', () => {
+                        clearInterval(paused);
+                    });
+                    slide.addEventListener('mouseleave', () => {
+                        this.autoPlayActivate();
+                    });
+                }
+            })
+        }
+    }
+
     nextSlide() {
         this.slides.forEach(slide => {
 
@@ -66,9 +82,6 @@ export default class MiniSlider extends Slider {
         `;
         this.bindTriggers();
         this.decorizeSlides();
-
-        if (this.autoplay) {
-            setInterval(() => this.nextSlide(), 5000);
-        }
+        this.autoPlayActivate();   
     }
 }
