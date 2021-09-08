@@ -1,8 +1,8 @@
 import Slider from "./slider";
 
 export default class MainSlider extends Slider {
-    constructor(btns) {
-        super(btns);
+    constructor(btns, nextModule, prevModule) {
+        super(btns, nextModule, prevModule);
     }
 
     showSlides(n) {
@@ -37,10 +37,7 @@ export default class MainSlider extends Slider {
         this.showSlides(this.slideIndex += n);
     }
 
-    render() {
-        try {
-            this.hanson = document.querySelector('.hanson');
-        } catch(e) {}
+    bindTriggers() {
         this.btns.forEach(btn => {
             btn.addEventListener('click', () => {
                 this.plusSlide(1);
@@ -53,6 +50,34 @@ export default class MainSlider extends Slider {
             });
         });
 
-        this.showSlides(this.slideIndex);
+        this.prevModule.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                this.plusSlide(-1);
+            });
+        });
+
+        this.nextModule.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                this.plusSlide(1);
+            });
+        });
+            
     }
+
+    render() {
+        if (this.container) {
+
+            try {
+                this.hanson = document.querySelector('.hanson');
+            } catch(e) {}
+
+            this.showSlides(this.slideIndex);
+            this.bindTriggers();
+
+        } 
+    } 
 }

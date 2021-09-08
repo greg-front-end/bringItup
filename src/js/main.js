@@ -3,10 +3,14 @@ import VideoPlayer from "./modules/playVideo";
 import MainSlider from "./modules/slider/slider-main";
 import MiniSlider from "./modules/slider/slider-mini";
 import Difference from "./modules/difference";
+import Form from "./modules/form";
 
 window.addEventListener('DOMContentLoaded', () => {
     const slider = new MainSlider({btns: '.next', container: '.page'});
     slider.render();
+
+    const modulePageSlider = new MainSlider({container: '.moduleapp', btns: '.next', nextModule: '.nextmodule', prevModule: '.prevmodule'});
+    modulePageSlider.render();
 
     const showUpSlider = new MiniSlider({
         container: '.showup__content-slider',
@@ -40,5 +44,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const education = new Difference('.officerold', '.officernew', '.officer__card-item');
     education.init();
-    // education.hideItems('.officernew');
+
+    new Form('.form').init();
 });

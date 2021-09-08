@@ -36,7 +36,7 @@ export default class MiniSlider extends Slider {
                         this.autoPlayActivate();
                     });
                 }
-            })
+            });
         }
     }
 
@@ -61,7 +61,7 @@ export default class MiniSlider extends Slider {
             this.slides.forEach(slide => {
 
                 if (slide.tagName === "BUTTON") {
-                    let active = this.slides[2];
+                    let active = this.slides[this.slides.length - 3];
                     this.container.appendChild(active);
                 }
 
@@ -74,14 +74,16 @@ export default class MiniSlider extends Slider {
     }
 
     init() { 
-        this.container.style.cssText = `
-        display: flex;
-        flex-wrap: wrap;
-        overflow: hidden;
-        align-items: flex-start;
-        `;
-        this.bindTriggers();
-        this.decorizeSlides();
-        this.autoPlayActivate();   
+        try {
+            this.container.style.cssText = `
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            align-items: flex-start;
+            `;
+            this.bindTriggers();
+            this.decorizeSlides();
+            this.autoPlayActivate();  
+        } catch (e) {}
     }
 }
